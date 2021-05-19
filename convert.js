@@ -28,13 +28,15 @@ const convertToApple = (el) => {
 
 // console.log(convertToApple(amldata_parsed.response.items[0]))
 
-let allStoryItems
+let allStoryItems =[];
 const processed = amldata_parsed.response.items.forEach(
     el => allStoryItems.push(convertToApple(el))
 )
 
-console.log(chalk.yellow(processed))
+// processed.clean();
 
-fs.writeFileSync('applefied.json', processed);
+console.log(chalk.bgGreen(processed))
+
+// fs.writeFileSync('applefied.json', processed);
 
 
