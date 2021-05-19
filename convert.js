@@ -1,5 +1,5 @@
 'use strict';
-
+const chalk = require('chalk');
 const fs = require('fs');
 
 //get the OG file and make it not buffer'd
@@ -17,20 +17,23 @@ const joinBodyText = (blurb) => {
 }
 const convertToApple = (el) => {
     return {
-        title: el.title,
-        author: el.author,
-        job:  el.job,
-        image:  el.image,
-        credit: el.credit,
-        blurb: joinBodyText(el.blurb)
+        title: el.title ? el.title : '',
+        author: el.author ? el.author : '',
+        job:  el.job ? el.job : '',
+        image:  el.image ? el.image : '',
+        credit: el.credit ? el.credit : '',
+        blurb: el.blurb ? joinBodyText(el.blurb) : ''
     }
 }
-console.log(convertToApple(amldata_parsed.response.items[0]))
+
+// console.log(convertToApple(amldata_parsed.response.items[0]))
 
 let allStoryItems
-const processed = amldata_parsed.response.items.forEach(el => allStoryItems.push(convertToApple(el)))
+const processed = amldata_parsed.response.items.forEach(
+    el => allStoryItems.push(convertToApple(el))
+)
 
-console.log(processed)
+console.log(chalk.yellow(processed))
 
 fs.writeFileSync('applefied.json', processed);
 
